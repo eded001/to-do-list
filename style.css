@@ -1,0 +1,37 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+:root {
+    --black-js: #2e302c;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+body * {
+    padding: 15px;
+    border: 1px solid;
+}
+
+#toDoList {
+    border-color: #f00;
+}
+#toDoList h1 {
+    border-color: #00f;
+}
+
+#adicionarItem {
+    border-color: #0f0;
+}
+
+#listItems > * {
+    border-color: #f0f;
+}
+
+input[type = "checkbox"]:checked + p { text-decoration: line-through; }
