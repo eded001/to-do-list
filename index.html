@@ -8,18 +8,21 @@
 </head>
 <body>
     <div id="toDoList">
-        <h1>to do list</h1>
         <div id="adicionarItem">
-            <input type="text" id="listItemInput">
-            <input type="button" value="adicionar" id="listAddInput">
+            <input type="text" id="listItemInput" autofocus maxlength="80" placeholder="inserir item">
+            <div id="inputs">
+                <input type="button" value="adicionar" id="listAddInput" disabled>
+                <input type="button" value="limpar" id="listClearListInput">
+            </div>
         </div>
+    </div>
 
+    <div id="items">
+        <h1>itens</h1>
         <div id="listItems">
-            <!-- <div data-itemTitle="n">
-                <input type="checkbox">
-                <p></p>
-                <input type="button" value="editar">
-                <input type="button" value="deletar" data-itemRemover="n">
+            <!-- <div data-itemtitle="n">
+                <p data-itemcontent="n"></p>
+                <button>excluir</button>
             </div> -->
         </div>
     </div>
