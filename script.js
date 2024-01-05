@@ -1,6 +1,7 @@
 // inputs de adição de itens
 const itemInput = document.getElementById('listItemInput');
 const itemAdd = document.getElementById('listAddInput');
+const itemClearList = document.getElementById('listClearListInput');
 
 // seção de adição de itens
 const listItems = document.getElementById('listItems');
@@ -10,14 +11,20 @@ const itemArray = [];
 
 // setando funções
 itemAdd.addEventListener('click', addItem);
+itemClearList.addEventListener('click', () => listItems.innerText = '');
+itemInput.oninput = () => {
+    if(itemInput.value != '') {
+        itemAdd.removeAttribute('disabled');
+    } else {
+        itemAdd.setAttribute('disabled', 'disabled');
+    }
+}
 
 function addItem() {
     // criando elementos
     itemConteiner = document.createElement('div');
-    checkBoxButton = document.createElement('input');
     p = document.createElement('p');
-    editButton = document.createElement('input');
-    removeButton = document.createElement('input');
+    removeButton = document.createElement('button');
 
     // pegando o valor do input text preenchido
     content = itemInput.value;
@@ -30,15 +37,9 @@ function addItem() {
 
     // setando atributos
     itemConteiner.setAttribute('data-itemTitle', lastIndex);
-    checkBoxButton.setAttribute('type', 'checkbox');
-    p.setAttribute('data-itemContent', lastIndex);
-    p.setAttribute('contentEditable', 'false');
-    editButton.setAttribute('type', 'button');
-    editButton.setAttribute('value', 'editar');
-    editButton.setAttribute('data-itemEdit', lastIndex);
-    removeButton.setAttribute('type', 'button');
-    removeButton.setAttribute('value', 'remover');
+    removeButton.innerText = 'X';
     removeButton.setAttribute('data-itemRemover', lastIndex);
+    itemAdd.setAttribute('disabled', 'disabled');
 
     // adicionando conteúdo a tag P
     p.innerText = content;
@@ -48,12 +49,9 @@ function addItem() {
 
     // setando funções´
     removeButton.onclick = () => removeItem(listItems);
-    editButton.onclick = () => editItem(listItems);
 
     // preenchendo o contêiner
-    itemConteiner.appendChild(checkBoxButton);
     itemConteiner.appendChild(p);
-    itemConteiner.appendChild(editButton);
     itemConteiner.appendChild(removeButton);
 
     // limpa o input text para ser preenchido novamente
@@ -74,24 +72,5 @@ function removeItem(parentConteiner) {
         parentRemover = parentConteiner;
         childRemoved = firstChild;
         parentRemover.removeChild(childRemoved);
-    }
-}
-
-function editItem(parentConteiner) {
-    // childs localizados
-    firstChild = parentConteiner.lastChild;
-    secondChild = parentConteiner.lastChild.children[1];
-
-    // atributos pegos
-    firstChildAttr = firstChild.getAttribute('data-itemTitle');
-    secondChildAttr = secondChild.getAttribute('data-itemContent');
-
-    // comparação dos tributos
-    if(firstChildAttr === secondChildAttr) {
-        if(secondChild.getAttribute('contentEditable') === 'false') {
-            secondChild.setAttribute('contentEditable', 'true');
-        } else {
-            secondChild.setAttribute('contentEditable', 'false');
-        }
     }
 }
